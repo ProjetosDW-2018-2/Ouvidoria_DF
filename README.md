@@ -1,5 +1,9 @@
 # Data Warehousing & Business Intelligence da Ouvidoria do Distrito Federal Brasileiro
 
+# Atenção: Os arquivos da entrega da 3va, estão no link abaixo.
+
+[a link](https://drive.google.com/open?id=1SAcG2MWKiNnBArMFQLRZ8MetwAx-B9mf)
+
 # Apresentação
 
 Todo projeto da disciplina Data Warehousing & Business Intelligence, referente à 3VA está disponível no link abaixo:
