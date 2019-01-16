@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% block title %}{{super()}}-Relatorio de Acidentes{% endblock %}
+{% block content %}
+<head xmlns="http://www.w3.org/1999/html">
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="\static\css\style5.css">
+</head>
+
+<body>
+<h2>Relatório de Acidentes</h2>
+<br>
+<div class="jumbotron">
+    <form class="form-inline" method="POST" action="{{ url_for('relatorio_acidentes') }}">
+        <div class="jumbotron">
+            <h2>Buscar por: </h2>
+            <br>
+            <div class="input-group">
+                <h6>Buscar por ano:&nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_ano" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Buscar por mês:&nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_mes" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Buscar por bairro:&nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_bairro" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="AFLITOS">Aflitos</option>
+                    <option value="AFOGADOS">Afogados</option>
+                    <option value="BAIRRO DO RECIFE">Bairro do Recife</option>
+                    <option value="BOA VIAGEM">Boa Viagem</option>
+                    <option value="BOA VISTA">Boa Vista</option>
+                    <option value="CASA AMARELA">Casa Amarela</option>
+                    <option value="CASA FORTE">Casa Forte</option>
+                    <option value="CORDEIRO">Cordeiro</option>
+                    <option value="DERBY">Derby</option>
+                    <option value="DOIS UNIDOS">Dois Unidos</option>
+                    <option value="ENCRUZILHADA">Encruzilhada</option>
+                    <option value="ESPINHEIRO">Espinheiro</option>
+                    <option value="GRAÇAS">Graças</option>
+                    <option value="ILHA DO LEITE">Ilha do Leite</option>
+                    <option value="ILHA DO RETIRO">Ilha do Retiro</option>
+                    <option value="IPUTINGA">Iputinga</option>
+                    <option value="MADALENA">Madalena</option>
+                    <option value="PARNAMIRIM">Parnamirim</option>
+                    <option value="PINA">Pina</option>
+                    <option value="SANTO AMARO">Santo Amaro</option>
+                    <option value="SANTO ANTÔNIO">Santo Antônio</option>
+                    <option value="SÃO JOSÉ">São José</option>
+                    <option value="SOLEDADE">Soledade</option>
+                    <option value="TORRE">Torre</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Buscar por quantidade de vítimas:&nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_qtd_vitimas" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Buscar</button>
+            <br>
+            <br>
+            <div class="jumbotron">
+                <h2>
+                    <center>Relatório baseado nos dados selecionados acima:</center>
+                </h2>
+                <br>
+                <center><h4 style="color:#4d4d33">Total de acidentes com vítimas: {{totalDeAcidentes}}</h4></center>
+                <br>
+                <h5 style="color:blue">&nbsp Tipo de envolvidos:</h5>
+                <br>
+                <h6>Automóvel: {{automovel}}</h6>
+                <h6>Pedestre: {{pedestre}}</h6>
+                <h6>Ciclomotor: {{ciclomotor}}</h6>
+                <h6>Ciclista: {{ ciclista}}</h6>
+                <h6>Motocicleta: {{motocicleta}}</h6>
+                <h6>Outros: {{outros}}</h6>
+                <br>
+                <h5 style="color:blue">&nbspTipo de ocorrência:</h5>
+                <br>
+                <h6>Colisão/choque: {{choque}}</h6>
+                <h6>Colisão com ciclista: {{choqueCiclista}}</h6>
+                <h6>Atropelamento: {{atropelamento}}</h6>
+                <h6>Acidente de percurso: {{acidentePercurso}}</h6>
+                <h6>Outros: {{outros2}}</h6>
+                <br>
+                <h5 style="color:blue">&nbsp Ranking dos bairros com maior riscos de acidentes:</h5>
+                <br>
+                <h6 style="color:red">1. Grupo 1 (risco mais alto): </h6>
+                {% for i in riscoMaisAlto %}
+                <h6>{{i}}</h6>
+                {% endfor %}
+                <br>
+                <h6 style="color:#e6b800">2. Grupo 2: </h6>
+                {% for i in riscoAlto %}
+                <h6>{{i}}</h6>
+                {% endfor %}
+                <br>
+                <br>
+                <h6 style="color:blue">3. Grupo 3: </h6>
+                {% for i in riscoMedio %}
+                <h6>{{i}}</h6>
+                {% endfor %}
+                <br>
+                <br>
+                <h6 style="color:green">4. Grupo 4 (risco mais baixo): </h6>
+                {% for i in riscoBaixo %}
+                <h6>{{i}}</h6>
+                {% endfor %}
+                <br>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+</body>
+<!-- http://www.devfuria.com.br/html-css/formularios/combobox/ -->
+{% endblock %}

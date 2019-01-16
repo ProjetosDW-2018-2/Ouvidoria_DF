@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}{{super()}}-Cadastro{% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h2>Cadastro</h2><br>
+<form action="" method="POST">
+    {{ form.csrf_token }}
+    <div class="form-group" type="email">
+        <label>E-mail</label>
+        {{ form.mail(class="form-control",
+        placeholder="'example@mail.com'") }}
+        {% if form.errors.mail %}
+        <div> <!--class="alert alert-danger" role="alert"-->
+            <ul>
+                {% for e in form.errors.mail %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        {{ form.password(class="form-control",
+        placeholder="Senha") }}
+        {% if form.errors.password %}
+        <div><!-- class="alert alert-danger" role="alert"-->
+            {
+            <ul>
+                {% for e in form.errors.password %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
+</form>
+</div>
+{% endblock %}

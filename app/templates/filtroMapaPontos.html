@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %}{{super()}}-Gerente de Correalacoes{% endblock %}
+{% block content %}
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="\static\css\style5.css">
+</head>
+
+<body>
+<h2>Resoluções das manifestações do  Destrito Federal</h2>
+<br>
+
+<div class="jumbotron">
+    <form class="form-inline" method="POST" action="{{ url_for('filtroMapaPontos') }}">
+        <div class="jumbotron">
+            <h6>Observação: Selecione todos os filtros.&nbsp</h6>
+            <br>
+            <br>
+            <div class="input-group">
+                <h6>Ano :  &nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_ano" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                     <option value="2018">2018</option>
+                </select>
+            </div>
+
+            <br>
+            <div class="input-group">
+                <h6>Tema :  &nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_tema" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="1">Agricultura e Abastecimento</option>
+                    <option value="2">Cultura</option>
+                     <option value="3">Desenvolvimento Social</option>
+                     <option value="4">Educação, Ciência e Tecnologia</option>
+                     <option value="5">Esporte e Lazer</option>
+                     <option value="6">Finanças</option>
+                     <option value="7">Habitação, Urbanismo e Meio Ambiente</option>
+                     <option value="8">Justiça, Segurança e Cidadania</option>
+                     <option value="9">Saneamento e Energia</option>
+                     <option value="10">Saúde</option>
+                     <option value="11">Trabalho e Empreendedorismo</option>
+                     <option value="12">Transporte e Mobilidade</option>
+                     <option value="13">Administração Pública</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Sexo :  &nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_sexo" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="2">Feminino</option>
+                    <option value="1">Masculino</option>
+                    <option value="3">Outro</option>
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Situação da manifestação :  &nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_situacao_manifestacao" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="1">Recebida</option>
+                    <option value="2">Em Análise</option>
+                    <option value="3">Respondida</option>
+                    <option value="4">Não Resolvida</option>
+                    <option value="5">Resolvida</option>
+                    <option value="6">Vencida</option>
+                    <option value="7">Prorrogada</option>
+                    <option value="8">Inválida</option>
+
+                </select>
+            </div>
+            <br>
+            <div class="input-group">
+                <h6>Tipo de resposta :  &nbsp</h6>
+                <span class="input-group-addon"></span>
+                <select name="comp_select_tipo_resposta" class="selectpicker form-control">
+                    <option value=""></option>
+                    <option value="Definitiva">Definitiva</option>
+                    <option value="Preliminar">Preliminar</option>
+                    <option value="Complementar">Complementar</option>
+
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Buscar</button>
+            <br>
+            <br>
+            <br>
+    </form>
+</div>
+
+<br>
+</body>
+{% endblock %}

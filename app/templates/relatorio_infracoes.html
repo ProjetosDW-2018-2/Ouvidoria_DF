@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}{{super()}}-Relatorio de Acidentes{% endblock %}
+{% block content %}
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="\static\css\style5.css">
+</head>
+
+<body>
+<h2>Relatório de Infrações</h2>
+<br>
+<div class="jumbotron">
+    <h2>Buscar por: </h2>
+    <br>
+    <h6>Buscar por ano:</h6>
+    <select id=cbAno>
+    <option value="" ></option>
+    <option value="2014" >2014</option>
+
+    <option value="2015" >2015</option>
+    <option value="2016" >2016</option>
+    </select>
+    <br>
+    <br>
+    <h6>Buscar por mês:</h6>
+    <select id=cbMes>
+    <option value="" ></option>
+    <option value="jan" >Janeiro</option>
+    <option value="fev" >Fevereiro</option>
+    <option value="mar" >Março</option>
+    <option value="abril" >Abril</option>
+    <option value="maio" >Maio</option>
+    <option value="jun" >Junho</option>
+    <option value="jul" >Julho</option>
+    <option value="agost" >Agosto</option>
+    <option value="set" >Setembro</option>
+    <option value="out" >Outubro</option>
+    <option value="nov" >Novembro</option>
+    <option value="dez" >Dezembro</option>
+    </select>
+    <br>
+    <br>
+    <h6>Buscar por bairro:</h6>
+    <select id=cbBairro>
+    <option value="" ></option>
+    <option value="jan" >Espinheiro</option>
+    <option value="fev" >Casa Forte</option>
+    <option value="mar" >Cordeiro</option>
+    <option value="abril" >Madalena</option>
+    <option value="maio" >Torre</option>
+    <option value="jun" >Casa Amarela</option>
+    <option value="jul" >Encruzilhada</option>
+    <option value="agost" >Graças</option>
+    <option value="set" >Santo Amaro</option>
+    <option value="out" >Boa Viagem</option>
+    <option value="nov" >Pina</option>
+    <option value="dez" >Aflitos</option>
+    <option value="dez" >Rosarinho</option>
+    </select>
+    <br>
+    <br>
+    <form action="" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label>Buscar por código da infração:</label>
+            {{ form.buscaHora(class="form-control",
+            placeholder="'Ex: 5452'") }}
+            {% if form.errors.buscaHora %}
+            <div> <!--class="alert alert-danger" role="alert"-->
+                <ul>
+                    {% for e in form.errors.buscaHora %}
+                    <li>{{ e }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </form>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Buscar</button>
+</div>
+
+<div class="jumbotron">
+    <h3><center>Relatório:</center></h3>
+    <br>
+    <h5>Total de infrações nesse período e bairro: </h5>
+    <br>
+    <h5>Tipo das infrações:</h5>
+    <br>
+    <h6>Automóvel: </h6>
+    <h6>Pedestre: </h6>
+    <h6>Ciclomotor: </h6>
+    <h6>Ciclista: </h6>
+    <h6>Motocicleta: </h6>
+    <h6>Outros: </h6>
+    <br>
+    <h5>Ranking dos bairros onde ocorrem mais infrações:</h5>
+    <br>
+    <h6>1. Grupo 1 (risco mais alto): </h6>
+    <h6>Espinheiro: </h6>
+    <h6>Casa Forte: </h6>
+    <h6>Cordeiro: </h6>
+    <br>
+    <h6>2. Grupo 2: </h6>
+    <h6>Madalena: </h6>
+    <h6>Torre: </h6>
+    <h6>Casa Amarela: </h6>
+    <br>
+    <h6>3. Grupo 3: </h6>
+    <h6>Encruzilhada: </h6>
+    <h6>Graças: </h6>
+    <h6>Santo Amaro: </h6>
+    <br>
+    <h6>4. Grupo 4 (risco mais baixo): </h6>
+    <h6>Boa Viagem: </h6>
+    <h6>Pina: </h6>
+    <h6>Aflitos: </h6>
+    <h6>Rosarinho: </h6>
+</div>
+</body>
+<!-- http://www.devfuria.com.br/html-css/formularios/combobox/ -->
+{% endblock %}

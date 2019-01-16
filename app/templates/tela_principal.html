@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}{{super()}}-Principal{% endblock %}
+{% block content %}
+<body>
+<!--{% if current_user.is_authenticated %}
+    {% with msg = get_flashed_messages(with_categories=false) %}
+        {%- for i in msg %}
+            {% if i == "Welcome" %}
+                <div class="alert alert-success alert-dismissible fade show" id="success-alert">
+                    <p><b>Usuário logado com sucesso!</b></p>
+                    <button class="close" data-dismiss="alert">&times;</button>
+                </div>
+            {% endif %}
+        {% endfor -%}
+    {% endwith %}
+{% endif %}-->
+
+<div class="jumbotron">
+    {% if current_user.is_authenticated  %}
+        <h1>Bem-Vindo! </h1>
+
+    {% else%}
+    <h1>Cadastre-se já! </h1>
+
+    <h4>Cadastrando-se hoje, você ganhará acesso ilimitado para ver mapas de calor e pontos das manifestações do destrito federal!</h4>
+      <!-- <h5>Super oferta! Plano SUPER por apenas R$399,99 mensal.</h5> -->
+
+    {% endif %}
+
+</div>
+
+  <!-- <div class="row marketing">
+    <div class="col-lg-6">
+        <h4>Acesso a relatórios</h4>
+        <p>Exportamos relatórios descritivos para o seu negócio.</p>
+
+        <h4>Mapas de calor</h4>
+        <p>Mostramos as correlações de infrações, acidentes, equipamentos de trânsitos na sua cidade.</p>
+
+        <h4>Gráficos</h4>
+        <p>Mostramos os dados sobre acidentes, infrações e equipamentos de trânsito por bairro.</p>
+    </div>
+
+    <div class="col-lg-6">
+        <h4>Atendemos Prefeituras.</h4>
+        <p>Nossa plataforma está pronta para seu negócio.</p>
+
+        <h4>Atendemos Seguradoras de veículos</h4>
+        <p>Nossa plataforma está pronta para seu negócio.</p>
+
+        <h4>Antendemos Órgãos de Trânsito</h4>
+        <p>Nossa plataforma está pronta para seu negócio.</p>
+
+    </div>
+</div> -->
+</body>
+</html>
+{% endblock %}
