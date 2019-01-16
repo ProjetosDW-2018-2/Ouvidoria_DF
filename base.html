@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Herói Social{% endblock %}</title>
+
+    <!-- Sidebar head -->
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="\static\css\style5.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            crossorigin="anonymous"></script>
+    <!-- Sidebar head -->
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <center><h2>Herói Social</h2></center>
+        </div>
+
+        <ul class="list-group">
+            {% if current_user.is_authenticated %}
+            <li>
+                <a href="#home3Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Correlações</a>
+                <ul class="collapse list-unstyled" id="home3Submenu">
+
+                    <li>
+                        <a href="{{url_for('mapa_semaforos') }}">Mapa de ponto Semáforos</a>
+                    </li>
+
+                    <li>
+                        <a href="{{url_for('mapa_acidente') }}">Mapa de calor Acidentes</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('mapa_ponto_acidente') }}">Mapa de ponto Acidentes</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('mapa_equipamentos') }}">Mapa de ponto Equipamentos de Fiscalização</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('gerente_correlacoes') }}">Gerente de pesquisas</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gráficos</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="{{url_for('graficos_acidentes') }}">Gráficos de Acidentes</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('graficos_infracoes') }}">Gráficos de Infrações</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#home2Submenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">Relatórios</a>
+                <ul class="collapse list-unstyled" id="home2Submenu">
+                    <li>
+                        <a href="{{url_for('relatorio_acidentes') }}">Acidentes</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('relatorio_infracoes') }}">Infrações</a>
+                    </li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Sidebar Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light pull-right">
+            <div class="container-fluid">
+                <!-- Botão da SideBar -->
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('index')}}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pagamento">Pagamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contato">Contato</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('sair') }}">Sair</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('cadastro')}}">Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('login')}}">Entrar</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="footer">
+            <br><br><br>
+            <center><p>&copy; 2018 Herói Social.</p></center>
+        </footer>
+
+        <!--<div class="footer">
+            <center><p>&copy; 2018 Herói Social.</p></center>
+        </div>-->
+
+    </div>
+</div> <!-- /container -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+
+
+</script>
+</body>
+</html>
